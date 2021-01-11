@@ -11,9 +11,13 @@ enabled.raise_for_status()
 
 if enabled.text == 'True':
     # Write commands
-    with open('C:\\GayApe\\run_gay_ape.bat', 'w') as batch_file:
+    with open('C:\\GayApe\\run.bat', 'w') as batch_file:
         print(COMMANDS, file=batch_file)
+    print('Batch file written')
+    input()
 else:
     # Erase batch file
-    with open('C:\\GayApe\\run_gay_ape.bat', 'w') as batch_file:
+    with open('C:\\GayApe\\run.bat', 'w') as batch_file:
         print('', file=batch_file)
+    print('Batch file erased')
+    input()
