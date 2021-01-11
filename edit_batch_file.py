@@ -1,22 +1,24 @@
-from imapclient import IMAPClient
+import requests
+import random
 
-username = 'calebwebster531@gmail.com'
-password = 'G.hoenn531'
-commands = """
+COMMANDS = """
 @echo off
 cd C:\\GayApe
 gay_ape.exe
 """
 
-with open('C:\\GayApe\\enabled.txt', 'r') as enabled_file_in:
-    if enabled_file_in.read().strip() == 'True':
-        with IMAPClient('imap.gmail.com') as gmail:
-            gmail.login(username, password)
-            gmail.select_folder('INBOX', readonly=True)
-            sender = b'calebwebsteredge@gmail.com'
-            msg_ids = gmail.search([b'FROM', sender, b'UNSEEN'])
-            if msg_ids:
-                with open('C:\\GayApe\\run_gay_ape.bat', 'w') as batch_file:
-                    print(commands, file=batch_file)
-                with open('C:\\GayApe\\enabled.txt', 'w') as enabled_file_out:
-                    print('False', file=enabled_file_out)
+enabled = requests.get('https://raw.githubusercontent.com/CalebWebsterJCU/GayApe/master/enabled.txt')
+enabled.raise_for_status()
+
+if enabled.text == 'True':
+    chances = requests.get('https://raw.githubusercontent.com/CalebWebsterJCU/GayApe/master/chances.txt')
+    chances.raise_for_status()
+    rand_num = int(chances.text)  # Odds of Gay Ape running, e.g. 10 = 1 in 10 chance
+    if random.randint(1, rand_num) == 1:
+        # Write commands to batch file
+        with open('C:\\GayApe\\run_gay_ape.bat', 'w') as batch_file:
+            print(COMMANDS, file=batch_file)
+else:
+    # Erase batch file
+    with open('C:\\GayApe\\run_gay_ape.bat', 'w') as batch_file:
+        print('', file=batch_file)
