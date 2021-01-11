@@ -10,6 +10,7 @@ enabled = requests.get('https://raw.githubusercontent.com/CalebWebsterJCU/GayApe
 enabled.raise_for_status()
 
 if enabled.text == 'True':
+    # Write commands
     with open('C:\\GayApe\\run_gay_ape.bat', 'w') as batch_file:
         print(COMMANDS, file=batch_file)
 else:

@@ -35,7 +35,7 @@ class ColourLabel(Label):
     pass
 
 
-class ColouredText(App):
+class GayApe(App):
     text = StringProperty()
 
     def __init__(self, **kwargs):
@@ -68,4 +68,4 @@ class ColouredText(App):
 
 
 if __name__ == '__main__':
-    ColouredText().run()
+    GayApe().run()
